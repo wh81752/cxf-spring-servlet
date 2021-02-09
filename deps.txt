@@ -1,24 +1,32 @@
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ----------< org.apache.cxf.samples:java_first_spring_support >----------
-[INFO] Building Spring HTTP Sample 3.5.0-SNAPSHOT
+[INFO] Building Spring HTTP Sample 1.0.0-SNAPSHOT
 [INFO] --------------------------------[ war ]---------------------------------
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.pom
+Progress (1): 1.1 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.pom (1.1 kB at 2.3 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar
+Progress (1): 2.7/12 kBProgress (1): 5.5/12 kBProgress (1): 8.2/12 kBProgress (1): 11/12 kB Progress (1): 12 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar (12 kB at 249 kB/s)
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ java_first_spring_support ---
-[INFO] org.apache.cxf.samples:java_first_spring_support:war:3.5.0-SNAPSHOT
+[INFO] org.apache.cxf.samples:java_first_spring_support:war:1.0.0-SNAPSHOT
+[INFO] +- org.slf4j:slf4j-log4j12:jar:1.7.30:compile
+[INFO] |  +- org.slf4j:slf4j-api:jar:1.7.30:compile
+[INFO] |  \- log4j:log4j:jar:1.2.17:compile
+[INFO] +- org.apache.cxf:cxf-rt-features-logging:jar:3.5.0-SNAPSHOT:compile
+[INFO] |  \- org.apache.cxf:cxf-core:jar:3.5.0-SNAPSHOT:compile
+[INFO] |     +- org.glassfish.jaxb:jaxb-runtime:jar:2.3.3:compile
+[INFO] |     |  +- org.glassfish.jaxb:txw2:jar:2.3.3:compile
+[INFO] |     |  +- com.sun.istack:istack-commons-runtime:jar:3.0.11:compile
+[INFO] |     |  \- com.sun.activation:jakarta.activation:jar:1.2.2:runtime
+[INFO] |     +- com.fasterxml.woodstox:woodstox-core:jar:6.2.3:compile
+[INFO] |     |  \- org.codehaus.woodstox:stax2-api:jar:4.2.1:compile
+[INFO] |     +- org.apache.ws.xmlschema:xmlschema-core:jar:2.2.5:compile
+[INFO] |     \- jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.3:compile
+[INFO] |        \- jakarta.activation:jakarta.activation-api:jar:1.2.2:compile
 [INFO] +- org.apache.cxf:cxf-rt-frontend-jaxws:jar:3.5.0-SNAPSHOT:compile
 [INFO] |  +- xml-resolver:xml-resolver:jar:1.2:compile
 [INFO] |  +- org.ow2.asm:asm:jar:9.0:compile
-[INFO] |  +- org.apache.cxf:cxf-core:jar:3.5.0-SNAPSHOT:compile
-[INFO] |  |  +- org.glassfish.jaxb:jaxb-runtime:jar:2.3.3:compile
-[INFO] |  |  |  +- org.glassfish.jaxb:txw2:jar:2.3.3:compile
-[INFO] |  |  |  +- com.sun.istack:istack-commons-runtime:jar:3.0.11:compile
-[INFO] |  |  |  \- com.sun.activation:jakarta.activation:jar:1.2.2:runtime
-[INFO] |  |  +- com.fasterxml.woodstox:woodstox-core:jar:6.2.3:compile
-[INFO] |  |  |  \- org.codehaus.woodstox:stax2-api:jar:4.2.1:compile
-[INFO] |  |  +- org.apache.ws.xmlschema:xmlschema-core:jar:2.2.5:compile
-[INFO] |  |  \- jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.3:compile
-[INFO] |  |     \- jakarta.activation:jakarta.activation-api:jar:1.2.2:compile
 [INFO] |  +- org.apache.cxf:cxf-rt-bindings-soap:jar:3.5.0-SNAPSHOT:compile
 [INFO] |  |  +- org.apache.cxf:cxf-rt-wsdl:jar:3.5.0-SNAPSHOT:compile
 [INFO] |  |  |  \- wsdl4j:wsdl4j:jar:1.6.3:compile
@@ -36,8 +44,7 @@
 [INFO] |  +- org.eclipse.jetty:jetty-io:jar:9.4.36.v20210114:compile
 [INFO] |  +- org.eclipse.jetty:jetty-security:jar:9.4.36.v20210114:compile
 [INFO] |  +- org.eclipse.jetty:jetty-continuation:jar:9.4.36.v20210114:compile
-[INFO] |  +- org.eclipse.jetty:jetty-http:jar:9.4.36.v20210114:compile
-[INFO] |  \- org.slf4j:slf4j-api:jar:1.7.30:compile
+[INFO] |  \- org.eclipse.jetty:jetty-http:jar:9.4.36.v20210114:compile
 [INFO] +- org.springframework:spring-context:jar:5.3.3:compile
 [INFO] |  +- org.springframework:spring-aop:jar:5.3.3:compile
 [INFO] |  +- org.springframework:spring-beans:jar:5.3.3:compile
@@ -45,16 +52,13 @@
 [INFO] |  |  \- org.springframework:spring-jcl:jar:5.3.3:compile
 [INFO] |  \- org.springframework:spring-expression:jar:5.3.3:compile
 [INFO] +- org.springframework:spring-web:jar:5.3.3:compile
-[INFO] +- org.eclipse.jetty:jetty-webapp:jar:9.4.36.v20210114:compile
-[INFO] |  +- org.eclipse.jetty:jetty-xml:jar:9.4.36.v20210114:compile
-[INFO] |  \- org.eclipse.jetty:jetty-servlet:jar:9.4.36.v20210114:compile
-[INFO] |     \- org.eclipse.jetty:jetty-util-ajax:jar:9.4.36.v20210114:compile
-[INFO] +- org.slf4j:slf4j-jdk14:jar:1.7.30:compile
-[INFO] +- org.slf4j:jcl-over-slf4j:jar:1.7.30:compile
-[INFO] \- org.apache.cxf:cxf-rt-features-logging:jar:3.5.0-SNAPSHOT:compile
+[INFO] \- org.eclipse.jetty:jetty-webapp:jar:9.4.36.v20210114:compile
+[INFO]    +- org.eclipse.jetty:jetty-xml:jar:9.4.36.v20210114:compile
+[INFO]    \- org.eclipse.jetty:jetty-servlet:jar:9.4.36.v20210114:compile
+[INFO]       \- org.eclipse.jetty:jetty-util-ajax:jar:9.4.36.v20210114:compile
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.462 s
-[INFO] Finished at: 2021-02-09T17:35:31+01:00
+[INFO] Total time:  2.355 s
+[INFO] Finished at: 2021-02-09T20:46:05+01:00
 [INFO] ------------------------------------------------------------------------

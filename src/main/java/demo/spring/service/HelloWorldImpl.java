@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 import javax.jws.WebService;
 
-@WebService(endpointInterface = "demo.spring.service.HelloWorld")
+@WebService(
+        targetNamespace = "service.spring.demo",
+        endpointInterface = "demo.spring.service.HelloWorld")
 public class HelloWorldImpl implements HelloWorld {
 
     @Autowired
