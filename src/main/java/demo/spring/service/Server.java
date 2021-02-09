@@ -1,20 +1,14 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements. See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership. The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at
- *
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE
+ * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
  */
 package demo.spring.service;
 
@@ -22,37 +16,53 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Server main starting point.
+ *
+ * Here we simply deploy a "war" file onto a servlet-container (Jetty).
+ * Every other servlet-container like tomcat, undertow (??), you name
+ * is also fine.
+ *
+ * Be aware that there is no Spring here and neither CXF. So all we do
+ * here is starting up and arbitrary webapp.
+ */
 public class Server {
+    static final Logger logger = LoggerFactory.getLogger(Server.class);
+    static int PORT = 9002;
 
-    protected Server() throws Exception {
-        System.out.println("Starting Server");
+    private static WebAppContext webappcontext() {
+        WebAppContext wac;
+        wac = new WebAppContext();
+        wac.setContextPath("/");
+        wac.setWar("target/JavaFirstSpringSupport.war");
+        return wac;
+    }
 
-        /**
-         * Important: This code simply starts up a servlet container and adds
-         * the web application in src/webapp to it. Normally you would be using
-         * Jetty or Tomcat and have the webapp packaged as a WAR. This is simply
-         * as a convenience so you do not need to configure your servlet
-         * container to see CXF in action!
-         */
-        org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(9002);
+    private static Handler[] handler() {
+        return new Handler[]{ webappcontext(),
+                new DefaultHandler()
+        };
+    }
 
-        WebAppContext webappcontext = new WebAppContext();
-        webappcontext.setContextPath("/");
-
-        webappcontext.setWar("target/JavaFirstSpringSupport.war");
-
+    private static HandlerCollection handlers() {
         HandlerCollection handlers = new HandlerCollection();
-        handlers.setHandlers(new Handler[] {webappcontext, new DefaultHandler()});
-
-        server.setHandler(handlers);
-        server.start();
-        System.out.println("Server ready...");
-        server.join();
+        handlers.setHandlers(handler());
+        return handlers;
     }
 
     public static void main(String[] args) throws Exception {
-        new Server();
+        org.eclipse.jetty.server.Server server;
+
+        logger.info("Starting Server at port {}", PORT);
+        server = new org.eclipse.jetty.server.Server(PORT);
+        server.setHandler(handlers());
+        server.start();
+        logger.info("Server ready at port {}, please go ahead ..", PORT);
+        server.join();
+        logger.info("good-by world.");
     }
 
 }

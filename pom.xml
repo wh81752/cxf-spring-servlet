@@ -30,6 +30,7 @@
     </parent>
 
     <build>
+        <finalName>JavaFirstSpringSupport</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -38,7 +39,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>JavaFirstSpringSupport</finalName>
     </build>
     <profiles>
         <profile>
