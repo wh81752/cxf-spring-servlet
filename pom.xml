@@ -1,45 +1,24 @@
 <?xml version="1.0"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements. See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership. The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License. You may obtain a copy of the License at
- 
-  http://www.apache.org/licenses/LICENSE-2.0
- 
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied. See the License for the
-  specific language governing permissions and limitations
-  under the License.
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.cxf.samples</groupId>
-    <artifactId>java_first_spring_support</artifactId>
+    <groupId>org.bitio.demo</groupId>
+    <artifactId>cxf-spring</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Spring HTTP Sample</name>
-    <description>Spring HTTP Sample</description>
     <packaging>war</packaging>
+
+    <name>CXF Spring Demo</name>
+    <description>
+        A basic demo showing how to setup a Webservice using CXF and wiring things up using Spring.
+    </description>
+
     <properties>
-        <cxf.version>3.5.0-SNAPSHOT</cxf.version>
+        <cxf.version>3.4.2</cxf.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--        <spring.boot.version>2.4.2</spring.boot.version>-->
-        <!--        <spring.cloud.eureka.version>3.0.0</spring.cloud.eureka.version>-->
-        <!--        <cxf.jetty9.version>9.4.36.v20210114</cxf.jetty9.version>-->
-        <!--        <cxf.httpcomponents.client.version>4.5.13</cxf.httpcomponents.client.version>-->
-        <!--        <cxf.swagger.ui.version>3.38.0</cxf.swagger.ui.version>-->
-        <!--        <cxf.tika.version>1.25</cxf.tika.version>-->
-        <!--        <cxf.tomcat.version>9.0.43</cxf.tomcat.version>-->
     </properties>
 
     <build>
-        <defaultGoal>install</defaultGoal>
+        <defaultGoal>package</defaultGoal>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -62,16 +41,6 @@
                     <version>1.6.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
-                    <version>${cxf.jetty9.version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>3.3.1</version>
@@ -84,7 +53,7 @@
             </plugins>
         </pluginManagement>
 
-        <finalName>JavaFirstSpringSupport</finalName>
+        <finalName>helloworld</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -105,6 +74,8 @@
                         </connector>
                     </connectors>
                     <contextPath>/</contextPath>
+                    <stopKey/>
+                    <stopPort/>
                 </configuration>
             </plugin>
         </plugins>
@@ -228,7 +199,7 @@
                                     <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <mainClass>demo.spring.service.Server</mainClass>
+                                    <mainClass>demo.spring.server.JettyServer</mainClass>
                                 </configuration>
                             </execution>
                         </executions>

@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package demo.spring.service;
+package demo.spring.server;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.handler.DefaultHandler;
@@ -27,17 +27,18 @@ import org.slf4j.LoggerFactory;
  * is also fine.
  *
  * Be aware that there is no Spring here and neither CXF. So all we do
- * here is starting up and arbitrary webapp.
+ * here is starting up and arbitrary webapp by deploying a given WAR
+ * into a servlet-container.
  */
-public class Server {
-    static final Logger logger = LoggerFactory.getLogger(Server.class);
+public class JettyServer {
+    static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
     static int PORT = 9002;
 
     private static WebAppContext webappcontext() {
         WebAppContext wac;
         wac = new WebAppContext();
         wac.setContextPath("/");
-        wac.setWar("target/JavaFirstSpringSupport.war");
+        wac.setWar("target/helloworld.war");
         return wac;
     }
 
