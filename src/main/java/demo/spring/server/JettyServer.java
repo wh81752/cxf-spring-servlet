@@ -22,13 +22,11 @@ import org.slf4j.LoggerFactory;
 /**
  * Server main starting point.
  *
- * Here we simply deploy a "war" file onto a servlet-container (Jetty).
- * Every other servlet-container like tomcat, undertow (??), you name
- * is also fine.
+ * Here we simply deploy a "war" file onto a servlet-container (Jetty). Every other servlet-container like tomcat,
+ * undertow (??), you name is also fine.
  *
- * Be aware that there is no Spring here and neither CXF. So all we do
- * here is starting up and arbitrary webapp by deploying a given WAR
- * into a servlet-container.
+ * Be aware that there is no Spring here and neither CXF. So all we do here is starting up and arbitrary webapp by
+ * deploying a given WAR into a servlet-container.
  */
 public class JettyServer {
     static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
@@ -43,9 +41,7 @@ public class JettyServer {
     }
 
     private static Handler[] handler() {
-        return new Handler[]{ webappcontext(),
-                new DefaultHandler()
-        };
+        return new Handler[] { webappcontext(), new DefaultHandler() };
     }
 
     private static HandlerCollection handlers() {

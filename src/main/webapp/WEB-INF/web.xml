@@ -18,16 +18,20 @@
   under the License.
 -->
 <web-app xmlns:w="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <display-name>cxf</display-name>
+    <display-name>cxfservlet</display-name>
     <servlet>
         <description>Apache CXF Endpoint</description>
-        <display-name>cxf</display-name>
-        <servlet-name>cxf</servlet-name>
+        <display-name>cxfservlet</display-name>
+        <servlet-name>cxfservlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>config-location</param-name>
+            <param-value>/WEB-INF/service-beans.xml</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>cxf</servlet-name>
+        <servlet-name>cxfservlet</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
     <session-config>

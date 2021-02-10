@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-// START SNIPPET: service
 package demo.spring.service;
 
 import javax.jws.WebService;
@@ -25,4 +24,3 @@ import javax.jws.WebService;
 public interface HelloWorld {
     String sayHi(String text);
 }
-// END SNIPPET: service

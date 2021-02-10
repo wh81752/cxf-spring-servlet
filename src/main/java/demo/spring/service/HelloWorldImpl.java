@@ -10,31 +10,29 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-// START SNIPPET: service
 package demo.spring.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.jws.WebService;
 
-@WebService(
-        targetNamespace = "service.spring.demo",
-        endpointInterface = "demo.spring.service.HelloWorld")
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@WebService(targetNamespace = "service.spring.demo", endpointInterface = "demo.spring.service.HelloWorld")
 public class HelloWorldImpl implements HelloWorld {
+    static final Logger logger = LoggerFactory.getLogger(HelloWorldImpl.class);
 
     @Autowired
-    Foobar foobar;
+    HwBusinessLogic hwBusinessLogic;
 
     @PostConstruct
     protected void postConstruct() {
-        System.out.println("*** wiring up HelloWorldImpl ..");
-        System.out.println("*** foobar => " + (this.foobar != null));
+        logger.info("*** wiring up {} ..", this.getClass().getName());
+        logger.info("*** hwBusinessLogic => " + (this.hwBusinessLogic != null));
     }
 
     public String sayHi(String text) {
-        System.out.println("sayHi called");
-        return "Hello " + text;
+        return this.hwBusinessLogic.sayHi(text);
     }
 }
-// END SNIPPET: service
