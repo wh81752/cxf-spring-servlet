@@ -10,10 +10,22 @@
     <name>CXF Spring Demo</name>
     <description>
         A basic demo showing how to setup a Webservice using CXF and wiring things up using Spring.
+
+        =Important=
+        The servlet API used is 5.0 being mostly identical with 3.0, except that namespace
+        jakarta.* is used. This impacts the tools and frameworks used.
+
+        Jetty: Starting with 11.0.0 all javax.* packages have been replaced with jakarta.*
+
+        =Dependency Scope=
+        Dependencies have been put in scope provided or made them optional to get rid of them in
+        generated war-file. Simply because they are already in classpath compiled by Maven using
+        jetty:run. In a production ready war-file you may want them to be non-optional of course.
     </description>
 
     <properties>
         <cxf.version>3.4.2</cxf.version>
+        <jetty.version>9.4.36.v20210114</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <format.skip>false</format.skip>
     </properties>
@@ -65,11 +77,10 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-<!--                <version>9.4.36.v20210114</version>-->
-                <version>10.0.0</version>
-<!--                <version>11.0.0</version>-->
+                <version>${jetty.version}</version>
                 <configuration>
-                    <scan>1000</scan>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <reload>automatic</reload>
                     <httpConnector>
                         <port>9002</port>
                     </httpConnector>
@@ -105,7 +116,7 @@
                 <artifactId>impsort-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <configuration>
-                    <groups>java.,javax.,org.,com.</groups>
+                    <groups>java.,javax.,org.,com.,jakarta.</groups>
                     <staticGroups>*</staticGroups>
                     <skip>${format.skip}</skip>
                     <removeUnused>true</removeUnused>
@@ -149,44 +160,45 @@
 
     <dependencies>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-features-logging</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
@@ -200,28 +212,41 @@
                 <dependency>
                     <groupId>jakarta.xml.bind</groupId>
                     <artifactId>jakarta.xml.bind-api</artifactId>
-
-                </dependency>
-                <dependency>
-                    <groupId>jakarta.annotation</groupId>
-                    <artifactId>jakarta.annotation-api</artifactId>
-
+                    <optional>true</optional>
                 </dependency>
                 <dependency>
                     <groupId>jakarta.xml.ws</groupId>
                     <artifactId>jakarta.xml.ws-api</artifactId>
-
-                </dependency>
-                <dependency>
-                    <groupId>jakarta.activation</groupId>
-                    <artifactId>jakarta.activation-api</artifactId>
-                    <version>1.2.2</version>
-
+                    <optional>true</optional>
                 </dependency>
                 <dependency>
                     <groupId>jakarta.jws</groupId>
                     <artifactId>jakarta.jws-api</artifactId>
+                    <optional>true</optional>
+                </dependency>
 
+                <!-- TODO: This dep must be present to startup with Jetty without warnings. -->
+                <dependency>
+                    <groupId>jakarta.activation</groupId>
+                    <artifactId>jakarta.activation-api</artifactId>
+                    <version>1.2.2</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>servlet50</id>
+            <!-- A profile to use servlet API 5.0. However, in order to use it some
+            further work is required as CXF 3.4.2 depends on servlet 3.0, i.e.
+            javax.* instead of jakarta.* -->
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>jakarta.servlet</groupId>
+                    <artifactId>jakarta.servlet-api</artifactId>
+                    <version>5.0.0</version>
                 </dependency>
             </dependencies>
         </profile>

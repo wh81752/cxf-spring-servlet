@@ -12,13 +12,6 @@
  */
 package demo.spring.server;
 
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.eclipse.jetty.webapp.WebAppContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Server main starting point.
  *
@@ -29,37 +22,37 @@ import org.slf4j.LoggerFactory;
  * deploying a given WAR into a servlet-container.
  */
 public class JettyServer {
-    static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
-    static int PORT = 9002;
-
-    private static WebAppContext webappcontext() {
-        WebAppContext wac;
-        wac = new WebAppContext();
-        wac.setContextPath("/");
-        wac.setWar("target/helloworld.war");
-        return wac;
-    }
-
-    private static Handler[] handler() {
-        return new Handler[] { webappcontext(), new DefaultHandler() };
-    }
-
-    private static HandlerCollection handlers() {
-        HandlerCollection handlers = new HandlerCollection();
-        handlers.setHandlers(handler());
-        return handlers;
-    }
-
-    public static void main(String[] args) throws Exception {
-        org.eclipse.jetty.server.Server server;
-
-        logger.info("Starting Server at port {}", PORT);
-        server = new org.eclipse.jetty.server.Server(PORT);
-        server.setHandler(handlers());
-        server.start();
-        logger.info("Server ready at port {}, please go ahead ..", PORT);
-        server.join();
-        logger.info("good-by world.");
-    }
-
+    // static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
+    // static int PORT = 9002;
+    //
+    // private static WebAppContext webappcontext() {
+    // WebAppContext wac;
+    // wac = new WebAppContext();
+    // wac.setContextPath("/");
+    // wac.setWar("target/helloworld.war");
+    // return wac;
+    // }
+    //
+    // private static Handler[] handler() {
+    // return new Handler[] { webappcontext(), new DefaultHandler() };
+    // }
+    //
+    // private static HandlerCollection handlers() {
+    // HandlerCollection handlers = new HandlerCollection();
+    // handlers.setHandlers(handler());
+    // return handlers;
+    // }
+    //
+    // public static void main(String[] args) throws Exception {
+    // org.eclipse.jetty.server.Server server;
+    //
+    // logger.info("Starting Server at port {}", PORT);
+    // server = new org.eclipse.jetty.server.Server(PORT);
+    // server.setHandler(handlers());
+    // server.start();
+    // logger.info("Server ready at port {}, please go ahead ..", PORT);
+    // server.join();
+    // logger.info("good-by world.");
+    // }
+    //
 }
