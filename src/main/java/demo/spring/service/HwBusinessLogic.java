@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 /**
  * HwBusinessLogic
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  * Simple business logic class, able to 'say hi'..
  */
 @Component
+@RequestScope
 public class HwBusinessLogic {
     static final Logger logger = LoggerFactory.getLogger(HwBusinessLogic.class);
 
